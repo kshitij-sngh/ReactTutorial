@@ -1,27 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-
-const Title = () => (
-    <>
-        <a href="/">
-            <img alt="logo" className="logo" src="https://image.similarpng.com/very-thumbnail/2021/09/Good-food-logo-design-on-transparent-background-PNG.png"></img>
-        </a>
-    </>
-)
-const Header = () =>(
-    <div className="header">
-        <Title/>
-        <div className="nav-items">
-            <ul>
-                <li>Home</li>
-                <li>About</li>
-                <li>Contact</li>
-                <li>Cart</li>
-            </ul>
-        </div>
-    </div>
-)
-const restaurantList=[{
+export const IMAGE_CDN_URL="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"
+export const restaurantList=[{
     "info": {
       "id": "21001",
       "name": "Pizza Hut",
@@ -433,33 +411,3 @@ const restaurantList=[{
     },
     "widgetId": "collectionV5RestaurantListWidget_SimRestoRelevance_food_seo"
   }]
-const RestaurantCard = ({cloudinaryImageId,name,cuisines,avgRating}) =>{
-    return (<div className="restaurant-card">
-        <img src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"+cloudinaryImageId}/>
-        <h2 className="restaurant-card-name">{name}</h2>
-        <h3 className="restaurant-card-cuisines">{cuisines.join(", ")}</h3>
-        <h4 className="restaurant-card-avg-rating">{avgRating} stars</h4>
-    </div>
-    )
-}
-const Body = () =>(
-    <>
-    <div className="restaurantList">
-    {restaurantList.map((restaurant)=><RestaurantCard {...restaurant.info} key={restaurant.info.key}/>)}
-    </div>
-    </>
-)
-const Footer = () =>(
-    <h4>Footer</h4>
-)
-const Container = ()=>(
-    <>
-        <Header/>
-        <Body/>
-        <Footer/>
-    </>
-)
-const root = ReactDOM.createRoot(document.getElementById("root"))
-
-root.render(<Container/>)
-
