@@ -15,9 +15,16 @@ const Body = () =>{
     async function fetchRestaurantList (){
         const data = await fetch(API_URL)
         const jsonData = await data.json()
-        const restaurantList = jsonData.data.cards[1].card.card.gridElements.infoWithStyle.restaurants;
-        setAllRestaurantList(restaurantList)
-        setFilteredRestaurantList(restaurantList)
+        jsonData.data.cards.forEach(card => {
+            if(card.card.card.id && card.card.card.id==="restaurant_grid_listing")
+            {
+                console.log("Found!")
+                const restaurantList = card.card.card.gridElements.infoWithStyle.restaurants;
+                setAllRestaurantList(restaurantList)
+                setFilteredRestaurantList(restaurantList)
+            }
+        });
+        
     }
 
     useEffect(()=>{
@@ -25,7 +32,7 @@ const Body = () =>{
     },[])
 
     if(!allRestaurantList) return null;
-    
+
     return allRestaurantList.length===0?<Shimmer/>:
         (<>
             <div className="search-container" key="search-container">
